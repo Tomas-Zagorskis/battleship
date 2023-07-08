@@ -1,4 +1,4 @@
-import { registration } from '../actions/registration';
+import { createRoom, registration, updateWinners } from '../actions/';
 import { Action, TypeUnion } from '../types/type';
 
 class GameController {
@@ -25,5 +25,15 @@ export const gameController = new GameController([
     type: 'reg',
     data: '',
     handler: registration,
+  },
+  {
+    type: 'update_winners',
+    data: '',
+    handler: updateWinners,
+  },
+  {
+    type: 'create_room',
+    data: '',
+    handler: createRoom,
   },
 ]);

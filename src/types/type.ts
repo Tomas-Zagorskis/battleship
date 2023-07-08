@@ -6,6 +6,7 @@ export const types = [
   'create_room',
   'add_user_to_room',
   'create_game',
+  'single_play',
   'update_room',
   'add_ships',
   'start_game',
@@ -30,11 +31,27 @@ export type Action = {
   handler: ActionHandler;
 };
 
-type ActionHandler = (data: string, webSocket: WebSocket) => Promise<string>;
+type ActionHandler = (
+  webSocket: WebSocket,
+  id: number,
+  data: string,
+) => Promise<string | void>;
 
 export type User = {
   name: string;
   password: string;
   index: number;
   wins: number;
+};
+
+export type Winner = {
+  name: string;
+  wins: number;
+};
+
+export type RoomUser = Omit<User, 'password' | 'wins'>;
+
+export type Room = {
+  roomId: number;
+  roomUsers: RoomUser[];
 };
