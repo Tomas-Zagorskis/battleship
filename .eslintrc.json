@@ -3,15 +3,10 @@
   "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaVersion": "latest",
-    "tsconfigRootDir": "__dirname",
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint/eslint-plugin"],
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "root": true,
   "env": {
     "node": true,
