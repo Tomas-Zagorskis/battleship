@@ -1,10 +1,8 @@
 import { gameController } from '../controller/gameController';
-import { GameInput, types } from '../types/type';
+import { GameInput } from '../types/type';
 
-export const parseInput = (input: string) => {
-  const { type, data } = JSON.parse(input) as GameInput;
-
-  if (types.includes(type)) throw new Error('Failed on request type');
+export const parseInput = async (input: string) => {
+  const { type, data } = (await JSON.parse(input)) as GameInput;
 
   const action = gameController.getAction(type);
   gameController.setData(type, data);
