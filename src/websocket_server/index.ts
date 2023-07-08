@@ -5,6 +5,7 @@ export const webSocketServer = (port: number): WebSocketServer => {
   const wss = new WebSocketServer({ port });
 
   wss.on('connection', async (webSocket: WebSocket) => {
+    const id = Number(Math.random().toString().split('.')[1]);
     const webSocketStream = createWebSocketStream(webSocket, {
       decodeStrings: false,
       encoding: 'utf-8',
@@ -13,13 +14,13 @@ export const webSocketServer = (port: number): WebSocketServer => {
     webSocketStream.on('data', async (data: string) => {
       try {
         console.log(`<- ${data}`);
-        const action = parseInput(data);
+        const action = await parseInput(data);
 
-        const respond = action.handler(action.data, webSocket);
+        const respond = await action.handler(webSocket, id, action.data);
         console.log(`-> ${respond}`);
       } catch (error) {
-        if (error instanceof Error) console.log(`ERROR: ${error.message}`);
-        else console.log(`ERROR: ${String(error)}`);
+        const err = error as Error;
+        console.log(err.message);
       }
     });
   });

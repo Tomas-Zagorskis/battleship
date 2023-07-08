@@ -3,14 +3,14 @@ import { User } from '../types/type';
 class UserController {
   private users: User[] = [];
 
-  private createNewUser(name: string, pass: string) {
+  private createNewUser(name: string, pass: string, id: number) {
     if (!validateUser(name, pass)) {
       throw new Error('Inputs must be at least 5 characters');
     }
     const newUser: User = {
       name,
       password: pass,
-      index: this.users.length,
+      index: id,
       wins: 0,
     };
 
@@ -18,19 +18,25 @@ class UserController {
     return newUser;
   }
 
-  getUser(name: string, pass: string) {
-    let user = this.users.find((user) => user.name === name);
+  getUser(name: string, pass: string, id: number) {
+    let user = this.users.find(
+      (user) => user.name === name && user.index === id,
+    );
 
     if (!user) {
-      user = this.createNewUser(name, pass);
+      user = this.createNewUser(name, pass, id);
     } else {
       if (user.password !== pass) throw new Error('Wrong password');
     }
     return user;
   }
+
+  getUserById(id: number) {
+    return this.users.find((user) => user.index === id);
+  }
 }
 
-export const Users = new UserController();
+export const users = new UserController();
 
 function validateUser(name: string, pass: string) {
   if (name.length > 4 && pass.length > 4) return true;
