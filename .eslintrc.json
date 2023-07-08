@@ -1,7 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json",
+    "project": "./tsconfig.json",
+    "ecmaVersion": "latest",
     "tsconfigRootDir": "__dirname",
     "sourceType": "module"
   },
@@ -15,7 +16,8 @@
   "env": {
     "node": true,
     "browser": true,
-    "es6": true
+    "es6": true,
+    "es2021": true
   },
   "ignorePatterns": [".eslintrc.json"],
   "rules": {

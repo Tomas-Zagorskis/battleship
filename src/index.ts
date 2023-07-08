@@ -1,5 +1,5 @@
-import { webSocketServer } from './src/websocket_server';
-import { httpServer } from './src/http_server';
+import { webSocketServer } from './websocket_server';
+import { httpServer } from './http_server';
 import 'dotenv/config.js';
 
 const HTTP_PORT: number = Number(process.env.HTTP_PORT) || 8181;

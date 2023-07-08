@@ -1,18 +1,21 @@
 {
   "name": "ws_task",
   "version": "1.0.0",
-  "description": "Template for the WebSocket remote control task",
-  "main": "index.ts",
+  "description": "WebSocket remote control task",
+  "main": "./src/index.ts",
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
-    "start": "nodemon ./index.ts"
+    "start:dev": "nodemon ./src/index.ts",
+    "start:prod": "webpack --mode=production --node-env=production && node dist/bundle.js"
   },
-  "author": "Andrei Auchynnikau, Tomas Zagorskis",
+  "author": "Tomas Zagorskis",
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.4.1",
+    "@types/webpack": "^5.28.1",
+    "@types/ws": "^8.5.5",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "cross-env": "^7.0.3",
@@ -21,8 +24,12 @@
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.16",
     "prettier": "^3.0.0",
+    "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
