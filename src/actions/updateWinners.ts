@@ -8,5 +8,4 @@ export const updateWinners = async (ws: WebSocket) => {
     data: JSON.stringify(winnersFromDb),
   });
   ws.send(result);
-  return result;
 };

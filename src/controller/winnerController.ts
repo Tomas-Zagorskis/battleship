@@ -15,9 +15,9 @@ class WinnersController {
     const winner = this.getWinner(name);
     if (winner) {
       winner.wins++;
-      return;
+    } else {
+      this.winners.push({ name, wins: 1 });
     }
-    this.winners.push({ name, wins: 1 });
   }
 }
 

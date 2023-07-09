@@ -10,5 +10,4 @@ export const updateRoom = async (ws: WebSocket) => {
   });
 
   ws.send(result);
-  return result;
 };

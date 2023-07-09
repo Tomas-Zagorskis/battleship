@@ -19,14 +19,12 @@ class UserController {
   }
 
   getUser(name: string, pass: string, id: number) {
-    let user = this.users.find(
-      (user) => user.name === name && user.index === id,
-    );
+    let user = this.users.find((user) => user.name === name);
 
     if (!user) {
       user = this.createNewUser(name, pass, id);
     } else {
-      if (user.password !== pass) throw new Error('Wrong password');
+      if (user.password !== pass) throw new Error('Wrong credentials');
     }
     return user;
   }

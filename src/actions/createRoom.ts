@@ -6,5 +6,5 @@ import { updateRoom } from './updateRoom';
 export const createRoom = async (ws: WebSocket, id: number) => {
   const user = users.getUserById(id);
   rooms.createRoom({ name: user!.name, index: user!.index });
-  return updateRoom(ws);
+  await updateRoom(ws);
 };

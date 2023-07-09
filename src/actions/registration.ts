@@ -1,11 +1,13 @@
 import { WebSocket } from 'ws';
 import { users } from '../controller/userController';
+import { updateRoom } from './updateRoom';
 
 export const registration = async (ws: WebSocket, id: number, data: string) => {
   let result: string;
   const { name, password } = await JSON.parse(data);
   try {
     const user = users.getUser(name, password, id);
+
     result = JSON.stringify({
       type: 'reg',
       data: JSON.stringify({
@@ -13,14 +15,13 @@ export const registration = async (ws: WebSocket, id: number, data: string) => {
         index: user.index,
         error: false,
         errorText: '',
-        id: 0,
       }),
+      id: 0,
     });
-    ws.send(result);
-    return result;
   } catch (error) {
     const err = error as Error;
-    (result = JSON.stringify({
+
+    result = JSON.stringify({
       type: 'reg',
       data: JSON.stringify({
         name: name,
@@ -29,8 +30,8 @@ export const registration = async (ws: WebSocket, id: number, data: string) => {
         errorText: err.message,
       }),
       id: 0,
-    })),
-      ws.send(result);
-    return result;
+    });
   }
+  ws.send(result);
+  await updateRoom(ws);
 };
