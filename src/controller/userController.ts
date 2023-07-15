@@ -3,7 +3,7 @@ import { User } from '../types/type';
 class UserController {
   private users: User[] = [];
 
-  private createNewUser(name: string, pass: string, id: number) {
+  private createNewUser(name: string, pass: string) {
     if (!validateUser(name, pass)) {
       throw new Error('Inputs must be at least 5 characters');
     }
@@ -11,7 +11,6 @@ class UserController {
       name,
       password: pass,
       index: this.users.length,
-      id,
       wins: 0,
     };
 
@@ -19,21 +18,19 @@ class UserController {
     return newUser;
   }
 
-  getUser(name: string, pass: string, id: number) {
+  getUser(name: string, pass: string) {
     let user = this.users.find((user) => user.name === name);
 
     if (!user) {
-      user = this.createNewUser(name, pass, id);
+      user = this.createNewUser(name, pass);
     } else if (user.password !== pass) {
       throw new Error('Wrong credentials');
-    } else {
-      user.id = id;
     }
     return user;
   }
 
   getUserById(id: number) {
-    return this.users.find((user) => user.id === id);
+    return this.users.find((user) => user.index === id);
   }
 }
 

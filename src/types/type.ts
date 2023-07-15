@@ -14,7 +14,7 @@ export const types = [
   'randomAttack',
   'turn',
   'finish',
-  'server_error',
+  'error',
 ] as const;
 
 export type TypeUnion = (typeof types)[number];
@@ -32,8 +32,7 @@ export type Action = {
 };
 
 type ActionHandler = (
-  webSocket: WebSocket,
-  id: number,
+  webSocket: WebSocketExt,
   data: string,
 ) => Promise<void> | void;
 
@@ -42,7 +41,6 @@ export type User = {
   password: string;
   index: number;
   wins: number;
-  id: number;
 };
 
 export type Winner = {
@@ -50,9 +48,13 @@ export type Winner = {
   wins: number;
 };
 
-export type RoomUser = Omit<User, 'password' | 'wins' | 'id'>;
+export type RoomUser = Pick<User, 'name' | 'index'>;
 
 export type Room = {
   roomId: number;
   roomUsers: RoomUser[];
 };
+
+export interface WebSocketExt extends WebSocket {
+  id: number;
+}

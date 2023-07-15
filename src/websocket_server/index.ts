@@ -1,21 +1,27 @@
-import { WebSocket, WebSocketServer } from 'ws';
+import { WebSocketServer } from 'ws';
 import { parseInput } from '../utils/responseParser';
+import { WebSocketExt } from '../types/type';
 
 export const webSocketServer = (port: number): WebSocketServer => {
   const wss = new WebSocketServer({ port });
 
-  wss.on('connection', async (webSocket: WebSocket) => {
-    const id = Number(Math.random().toString().split('.')[1]);
-
-    webSocket.on('error', console.log);
+  wss.on('connection', async (webSocket: WebSocketExt) => {
+    webSocket.on('error', console.error);
 
     webSocket.on('message', async (data: string) => {
       try {
         const action = await parseInput(data);
-        await action.handler(webSocket, id, action.data);
+        await action.handler(webSocket, action.data);
       } catch (error) {
         const err = error as Error;
-        console.log(err.message);
+        console.error(err.message);
+        webSocket.send(
+          JSON.stringify({
+            type: 'error',
+            data: err.message,
+            id: 0,
+          }),
+        );
       }
     });
   });
