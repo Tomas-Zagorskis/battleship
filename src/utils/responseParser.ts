@@ -1,11 +1,11 @@
-import { gameController } from '../controller/gameController';
+import { appController } from '../controller/appController';
 import { GameInput } from '../types/type';
 
 export const parseInput = async (input: string) => {
   const { type, data } = (await JSON.parse(input)) as GameInput;
 
-  const action = gameController.getAction(type);
-  gameController.setData(type, data);
+  const action = appController.getAction(type);
+  appController.setData(type, data);
 
   return action;
 };

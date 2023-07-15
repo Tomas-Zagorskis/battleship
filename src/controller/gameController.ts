@@ -1,39 +1,9 @@
-import { createRoom, registration, updateWinners } from '../actions/';
-import { Action, TypeUnion } from '../types/type';
-
 class GameController {
-  private readonly actions: Action[];
+  private games = [];
 
-  constructor(actions: Action[]) {
-    this.actions = actions;
-  }
-
-  getAction(name: TypeUnion) {
-    const action = this.actions.find((action) => action.type === name);
-    if (!action) throw new Error('Action not found');
-    return action;
-  }
-
-  setData(type: TypeUnion, data: string) {
-    const action = this.getAction(type);
-    action.data = data;
+  createGame() {
+    this.games.push();
   }
 }
 
-export const gameController = new GameController([
-  {
-    type: 'reg',
-    data: '',
-    handler: registration,
-  },
-  {
-    type: 'update_winners',
-    data: '',
-    handler: updateWinners,
-  },
-  {
-    type: 'create_room',
-    data: '',
-    handler: createRoom,
-  },
-]);
+export const games = new GameController();

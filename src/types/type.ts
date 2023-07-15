@@ -42,6 +42,7 @@ export type User = {
   password: string;
   index: number;
   wins: number;
+  id: number;
 };
 
 export type Winner = {
@@ -49,7 +50,7 @@ export type Winner = {
   wins: number;
 };
 
-export type RoomUser = Omit<User, 'password' | 'wins'>;
+export type RoomUser = Omit<User, 'password' | 'wins' | 'id'>;
 
 export type Room = {
   roomId: number;

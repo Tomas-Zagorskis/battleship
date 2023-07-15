@@ -10,7 +10,8 @@ class UserController {
     const newUser: User = {
       name,
       password: pass,
-      index: id,
+      index: this.users.length,
+      id,
       wins: 0,
     };
 
@@ -23,14 +24,16 @@ class UserController {
 
     if (!user) {
       user = this.createNewUser(name, pass, id);
+    } else if (user.password !== pass) {
+      throw new Error('Wrong credentials');
     } else {
-      if (user.password !== pass) throw new Error('Wrong credentials');
+      user.id = id;
     }
     return user;
   }
 
   getUserById(id: number) {
-    return this.users.find((user) => user.index === id);
+    return this.users.find((user) => user.id === id);
   }
 }
 
