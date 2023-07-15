@@ -15,6 +15,6 @@ export const addUserToRoom = async (
   if (user) {
     rooms.joinToRoom({ name: user.name, index: user.index }, indexRoom);
     await createGame(ws, user);
-    await updateRoom(ws);
+    updateRoom();
   }
 };

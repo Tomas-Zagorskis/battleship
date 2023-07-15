@@ -35,7 +35,7 @@ type ActionHandler = (
   webSocket: WebSocket,
   id: number,
   data: string,
-) => Promise<void>;
+) => Promise<void> | void;
 
 export type User = {
   name: string;

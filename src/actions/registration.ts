@@ -18,6 +18,7 @@ export const registration = async (ws: WebSocket, id: number, data: string) => {
       }),
       id: 0,
     });
+    updateRoom();
   } catch (error) {
     const err = error as Error;
 
@@ -33,5 +34,4 @@ export const registration = async (ws: WebSocket, id: number, data: string) => {
     });
   }
   ws.send(result);
-  await updateRoom(ws);
 };

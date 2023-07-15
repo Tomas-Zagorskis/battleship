@@ -9,7 +9,7 @@ console.log(`Start static http server on the ${HTTP_PORT} port!`);
 httpServer.listen(HTTP_PORT);
 
 console.log(`Start WebSocket server on the ${WS_PORT} port!`);
-const wss = webSocketServer(WS_PORT);
+export const wss = webSocketServer(WS_PORT);
 
 process.on('SIGINT', () => {
   console.log('Shutting down http and websocket servers!');

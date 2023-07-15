@@ -1,4 +1,4 @@
-import { createWebSocketStream, WebSocket, WebSocketServer } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
 import { parseInput } from '../utils/responseParser';
 
 export const webSocketServer = (port: number): WebSocketServer => {
@@ -6,12 +6,10 @@ export const webSocketServer = (port: number): WebSocketServer => {
 
   wss.on('connection', async (webSocket: WebSocket) => {
     const id = Number(Math.random().toString().split('.')[1]);
-    const webSocketStream = createWebSocketStream(webSocket, {
-      decodeStrings: false,
-      encoding: 'utf-8',
-    });
 
-    webSocketStream.on('data', async (data: string) => {
+    webSocket.on('error', console.log);
+
+    webSocket.on('message', async (data: string) => {
       try {
         const action = await parseInput(data);
         await action.handler(webSocket, id, action.data);
