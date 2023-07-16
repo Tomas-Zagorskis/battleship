@@ -2,6 +2,7 @@ import { Room, RoomUser } from '../types/type';
 
 class RoomController {
   private rooms: Room[] = [];
+  private index: number = 0;
 
   public createRoom(user: RoomUser) {
     const isUserInRoom = this.rooms.find(
@@ -10,10 +11,10 @@ class RoomController {
 
     if (!!isUserInRoom) throw new Error('You already created room');
     const newRoom: Room = {
-      roomId: this.rooms.length,
+      roomId: this.index,
       roomUsers: [user],
     };
-
+    this.index++;
     this.rooms.push(newRoom);
   }
 
@@ -31,6 +32,9 @@ class RoomController {
     }
     if (room && room.roomUsers.length === 1) {
       room.roomUsers.push(user);
+      this.rooms = this.rooms.filter(
+        (room) => room.roomUsers[0]?.index !== user.index,
+      );
       return room;
     }
   }
