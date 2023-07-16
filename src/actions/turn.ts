@@ -1,13 +1,15 @@
-import { GameInput, WebSocketExt } from '../types/type';
+import { Game, GameInput } from '../types/type';
 
-export const turn = (ws: WebSocketExt) => {
+export const turn = (game: Game, playerId: number) => {
   const result = JSON.stringify({
     type: 'turn',
     data: JSON.stringify({
-      currentPlayer: ws.id,
+      currentPlayer: playerId,
     }),
     id: 0,
   } as GameInput);
 
-  ws.send(result);
+  game.players.forEach((player) => {
+    player.ws.send(result);
+  });
 };

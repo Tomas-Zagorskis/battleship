@@ -1,5 +1,6 @@
 import { addShips } from './addShips';
 import { addUserToRoom } from './addUserToRoom';
+import { attack } from './attack';
 import { createRoom } from './createRoom';
 import { registration } from './registration';
 import { startGame } from './startGame';
@@ -14,4 +15,5 @@ export {
   addShips,
   startGame,
   turn,
+  attack,
 };

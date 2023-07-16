@@ -72,7 +72,7 @@ export type Ship = {
   type: ShipType;
 };
 
-type Position = {
+export type Position = {
   x: number;
   y: number;
 };
@@ -91,3 +91,20 @@ export type Player = {
   ws: WebSocketExt;
   ships: Ship[];
 };
+
+export type Attack = {
+  gameId: number;
+  x: number;
+  y: number;
+  indexPlayer: number;
+};
+
+export type BoardInfo = {
+  occupiedCoordMap: Map<Position, Ship>;
+  shipHealths: Map<Ship, number>;
+  totalHealth: number;
+};
+
+const shotTypes = ['miss', 'killed', 'shot'] as const;
+
+export type ShotType = (typeof shotTypes)[number];

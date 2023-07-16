@@ -1,6 +1,7 @@
 import {
   addShips,
   addUserToRoom,
+  attack,
   createRoom,
   registration,
   updateWinners,
@@ -51,5 +52,10 @@ export const appController = new AppController([
     type: 'add_ships',
     data: '',
     handler: addShips,
+  },
+  {
+    type: 'attack',
+    data: '',
+    handler: attack,
   },
 ]);
