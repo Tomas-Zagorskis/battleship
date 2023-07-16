@@ -1,9 +1,7 @@
 import { wss } from '..';
-import { games } from '../controller/gameController';
 import { Room, WebSocketExt } from '../types/type';
 
 export const createGame = (room: Room) => {
-  games.createGame();
   room.roomUsers.forEach((player) => {
     const result = JSON.stringify({
       type: 'create_game',

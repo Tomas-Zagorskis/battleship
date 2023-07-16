@@ -1,5 +1,9 @@
 import { WebSocket } from 'ws';
 
+export interface WebSocketExt extends WebSocket {
+  id: number;
+}
+
 export const types = [
   'reg',
   'update_winners',
@@ -55,6 +59,35 @@ export type Room = {
   roomUsers: RoomUser[];
 };
 
-export interface WebSocketExt extends WebSocket {
-  id: number;
-}
+export type StartGame = {
+  gameId: number;
+  ships: Ship[];
+  indexPlayer: number;
+};
+
+export type Ship = {
+  position: Position;
+  direction: boolean;
+  length: number;
+  type: ShipType;
+};
+
+type Position = {
+  x: number;
+  y: number;
+};
+
+const shipTypes = ['small', 'medium', 'large', 'huge'] as const;
+
+export type ShipType = (typeof shipTypes)[number];
+
+export type Game = {
+  gameId: number;
+  players: Player[];
+};
+
+export type Player = {
+  indexPlayer: number;
+  ws: WebSocketExt;
+  ships: Ship[];
+};

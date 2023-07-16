@@ -1,8 +1,25 @@
-class GameController {
-  private games = [];
+import { startGame } from '../actions';
+import { Game, Player, StartGame, WebSocketExt } from '../types/type';
 
-  createGame() {
-    this.games.push();
+class GameController {
+  private games: Game[] = [];
+
+  createGame(game: StartGame, ws: WebSocketExt) {
+    const { gameId, indexPlayer, ships } = game;
+    const player: Player = { indexPlayer, ships, ws };
+    const currentGame = this.getGame(gameId);
+
+    if (currentGame) {
+      currentGame.players.push(player);
+      startGame(currentGame);
+    } else {
+      const newGame: Game = { gameId, players: [player] };
+      this.games.push(newGame);
+    }
+  }
+
+  getGame(id: number) {
+    return this.games.find((game) => game.gameId === id);
   }
 }
 

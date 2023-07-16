@@ -1,4 +1,5 @@
 import {
+  addShips,
   addUserToRoom,
   createRoom,
   registration,
@@ -45,5 +46,10 @@ export const appController = new AppController([
     type: 'add_user_to_room',
     data: '',
     handler: addUserToRoom,
+  },
+  {
+    type: 'add_ships',
+    data: '',
+    handler: addShips,
   },
 ]);
