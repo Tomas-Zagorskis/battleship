@@ -1,4 +1,4 @@
-import { startGame } from '../actions';
+import { startGame, turn } from '../actions';
 import { Game, Player, StartGame, WebSocketExt } from '../types/type';
 
 class GameController {
@@ -12,6 +12,7 @@ class GameController {
     if (currentGame) {
       currentGame.players.push(player);
       startGame(currentGame);
+      turn(currentGame.players[0]!.ws);
     } else {
       const newGame: Game = { gameId, players: [player] };
       this.games.push(newGame);

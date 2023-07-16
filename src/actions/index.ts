@@ -3,6 +3,7 @@ import { addUserToRoom } from './addUserToRoom';
 import { createRoom } from './createRoom';
 import { registration } from './registration';
 import { startGame } from './startGame';
+import { turn } from './turn';
 import { updateWinners } from './updateWinners';
 
 export {
@@ -12,4 +13,5 @@ export {
   addUserToRoom,
   addShips,
   startGame,
+  turn,
 };
