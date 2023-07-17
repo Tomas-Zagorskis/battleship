@@ -3,6 +3,7 @@ import {
   addUserToRoom,
   attack,
   createRoom,
+  randomAttack,
   registration,
   updateWinners,
 } from '../actions';
@@ -57,5 +58,10 @@ export const appController = new AppController([
     type: 'attack',
     data: '',
     handler: attack,
+  },
+  {
+    type: 'randomAttack',
+    data: '',
+    handler: randomAttack,
   },
 ]);

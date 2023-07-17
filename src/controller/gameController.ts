@@ -82,6 +82,29 @@ class GameController {
     return 'shot';
   }
 
+  isAvailableFire(attack: Attack) {
+    const game = this.getGame(attack.gameId);
+    if (!game) return false;
+
+    const opponent = game.players.find(
+      (player) => player.indexPlayer !== attack.indexPlayer,
+    );
+    if (!opponent) return false;
+
+    const opponentBoard = this.gameBoards.get(opponent.indexPlayer);
+    if (!opponentBoard) return false;
+
+    const xLine = opponentBoard.boardXY.get(attack.y);
+    if (!xLine) return false;
+    const ship = xLine.get(attack.x);
+    if (ship === undefined) return false;
+    if (ship === 0 || typeof ship !== 'number') {
+      return true;
+    }
+
+    return false;
+  }
+
   private createGameBoard(playerId: number, ships: Ship[]) {
     const boardXY = this.emptyBoard();
     const shipHealths = new Map<Ship, number>();
