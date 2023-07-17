@@ -2,6 +2,7 @@ import { addShips } from './addShips';
 import { addUserToRoom } from './addUserToRoom';
 import { attack } from './attack';
 import { createRoom } from './createRoom';
+import { finish } from './finish';
 import { randomAttack } from './randomAttack';
 import { registration } from './registration';
 import { startGame } from './startGame';
@@ -18,4 +19,5 @@ export {
   turn,
   attack,
   randomAttack,
+  finish,
 };

@@ -1,4 +1,4 @@
-import { startGame, turn, attack } from '../actions';
+import { startGame, turn, attack, finish } from '../actions';
 import {
   Attack,
   BoardInfo,
@@ -68,16 +68,20 @@ class GameController {
     }
 
     let live = opponentBoard.shipHealths.get(ship as Ship);
+    let totalLive = opponentBoard.totalHealth;
     if (!live) return null;
     live--;
+    totalLive--;
     opponentBoard.shipHealths.set(ship as Ship, live);
-
+    opponentBoard.totalHealth = totalLive;
     if (live === 0) {
       xLine.set(attack.x, 3);
       this.killShip(ship as Ship, game.gameId, attack.indexPlayer, opponent.ws);
+      if (totalLive === 0) {
+        finish(game, attack.indexPlayer);
+      }
       return 'killed';
     }
-
     xLine.set(attack.x, 2);
     return 'shot';
   }
