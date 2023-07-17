@@ -83,6 +83,7 @@ export type ShipType = (typeof shipTypes)[number];
 
 export type Game = {
   gameId: number;
+  activePlayer: number;
   players: Player[];
 };
 

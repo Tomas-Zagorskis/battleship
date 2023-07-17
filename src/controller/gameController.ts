@@ -22,9 +22,13 @@ class GameController {
     if (currentGame) {
       currentGame.players.push(player);
       startGame(currentGame);
-      turn(currentGame, currentGame.players[0]!.indexPlayer);
+      turn(currentGame, currentGame.activePlayer);
     } else {
-      const newGame: Game = { gameId, players: [player] };
+      const newGame: Game = {
+        gameId,
+        activePlayer: indexPlayer,
+        players: [player],
+      };
       this.games.push(newGame);
     }
   }
@@ -182,7 +186,7 @@ class GameController {
             y: j,
             indexPlayer,
           });
-          attack(ws, data);
+          attack(ws, data, true);
         }
       }
     } else {
@@ -199,7 +203,7 @@ class GameController {
             y: j,
             indexPlayer,
           });
-          attack(ws, data);
+          attack(ws, data, true);
         }
       }
     }
