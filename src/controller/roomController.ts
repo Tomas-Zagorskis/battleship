@@ -2,14 +2,14 @@ import { Room, RoomUser } from '../types/type';
 
 class RoomController {
   private rooms: Room[] = [];
-  private index: number = 0;
+  private index = 0;
 
   public createRoom(user: RoomUser) {
     const isUserInRoom = this.rooms.find(
       (room) => room.roomUsers[0]?.index === user.index,
     );
 
-    if (!!isUserInRoom) throw new Error('You already created room');
+    if (isUserInRoom) throw new Error('You already created room');
     const newRoom: Room = {
       roomId: this.index,
       roomUsers: [user],

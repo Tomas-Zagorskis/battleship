@@ -126,15 +126,17 @@ class GameController {
         // increase y position
         const yLength = y + ship.length;
         for (; y < yLength; y++) {
-          let row = boardXY.get(y);
-          row!.set(x, ship);
+          const row = boardXY.get(y);
+          if (!row) return;
+          row.set(x, ship);
         }
       } else {
         // increase x position
         const xLength = x + ship.length;
-        let row = boardXY.get(y);
+        const row = boardXY.get(y);
+        if (!row) return;
         for (; x < xLength; x++) {
-          row!.set(x, ship);
+          row.set(x, ship);
         }
       }
     });
@@ -169,8 +171,8 @@ class GameController {
     const shipX = ship.position.x;
     const shipY = ship.position.y;
 
-    let x = shipX < 1 ? shipX : shipX - 1;
-    let y = shipY < 1 ? shipY : shipY - 1;
+    const x = shipX < 1 ? shipX : shipX - 1;
+    const y = shipY < 1 ? shipY : shipY - 1;
 
     if (ship.direction) {
       // vertical ship

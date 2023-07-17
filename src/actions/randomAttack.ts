@@ -4,8 +4,8 @@ import { attack } from './attack';
 
 export const randomAttack = (ws: WebSocketExt, data: string) => {
   const { gameId, indexPlayer } = JSON.parse(data);
-  let x = randomCoord();
-  let y = randomCoord();
+  const x = randomCoord();
+  const y = randomCoord();
 
   const shot: Attack = {
     gameId,

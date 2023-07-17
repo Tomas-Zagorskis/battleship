@@ -5,7 +5,7 @@ import { turn } from './turn';
 export const attack = (
   _ws: WebSocketExt,
   data: string,
-  killShots: boolean = false,
+  killShots = false,
 ) => {
   const attack = JSON.parse(data) as Attack;
 

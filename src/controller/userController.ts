@@ -38,8 +38,9 @@ class UserController {
 
   addWin(id: number) {
     const user = this.getUserById(id);
-    user!.wins++;
-    winners.increaseWin(user!.name);
+    if (!user) return;
+    user.wins++;
+    winners.increaseWin(user.name);
   }
 }
 
