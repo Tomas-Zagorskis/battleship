@@ -1,8 +1,9 @@
+import { mockedUsers } from '../data/users';
 import { User } from '../types/type';
 import { winners } from './winnerController';
 
 class UserController {
-  private users: User[] = [];
+  private users: User[] = mockedUsers;
 
   private createNewUser(name: string, pass: string) {
     if (!validateUser(name, pass)) {

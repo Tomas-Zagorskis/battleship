@@ -1,7 +1,8 @@
+import { mockedWinners } from '../data/winners';
 import { Winner } from '../types/type';
 
 class WinnersController {
-  private winners: Winner[] = [];
+  private winners: Winner[] = mockedWinners;
 
   addNewWinner(name: string) {
     this.winners.push({ name, wins: 0 });
