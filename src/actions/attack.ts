@@ -8,7 +8,7 @@ export const attack = (_ws: WebSocketExt, data: string) => {
   const game = games.getGame(attack.gameId);
   if (!game) return;
 
-  const result = games.attack(attack);
+  const result = games.fire(attack);
   if (!result) return;
 
   const respond = JSON.stringify({

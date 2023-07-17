@@ -100,7 +100,7 @@ export type Attack = {
 };
 
 export type BoardInfo = {
-  occupiedCoordMap: Map<Position, Ship>;
+  boardXY: Map<number, Map<number, number | Ship>>;
   shipHealths: Map<Ship, number>;
   totalHealth: number;
 };
