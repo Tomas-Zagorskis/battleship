@@ -1,4 +1,5 @@
 import { User } from '../types/type';
+import { winners } from './winnerController';
 
 class UserController {
   private users: User[] = [];
@@ -15,6 +16,7 @@ class UserController {
     };
 
     this.users.push(newUser);
+    winners.addNewWinner(name);
     return newUser;
   }
 
@@ -31,6 +33,12 @@ class UserController {
 
   getUserById(id: number) {
     return this.users.find((user) => user.index === id);
+  }
+
+  addWin(id: number) {
+    const user = this.getUserById(id);
+    user!.wins++;
+    winners.increaseWin(user!.name);
   }
 }
 

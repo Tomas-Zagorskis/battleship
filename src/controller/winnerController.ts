@@ -3,21 +3,21 @@ import { Winner } from '../types/type';
 class WinnersController {
   private winners: Winner[] = [];
 
-  getWinner(name: string) {
-    return this.winners.find((winner) => winner.name === name);
+  addNewWinner(name: string) {
+    this.winners.push({ name, wins: 0 });
   }
 
   getWinners() {
-    return this.winners;
+    return this.winners.sort((a, b) => b.wins - a.wins);
   }
 
-  updateWin(name: string) {
+  increaseWin(name: string) {
     const winner = this.getWinner(name);
-    if (winner) {
-      winner.wins++;
-    } else {
-      this.winners.push({ name, wins: 1 });
-    }
+    if (winner) winner.wins++;
+  }
+
+  private getWinner(name: string) {
+    return this.winners.find((winner) => winner.name === name);
   }
 }
 

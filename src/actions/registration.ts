@@ -1,6 +1,7 @@
 import { users } from '../controller/userController';
 import { updateRoom } from './updateRoom';
 import { WebSocketExt } from '../types/type';
+import { updateWinners } from './updateWinners';
 
 export const registration = (ws: WebSocketExt, data: string) => {
   let result: string;
@@ -18,7 +19,9 @@ export const registration = (ws: WebSocketExt, data: string) => {
       }),
       id: 0,
     });
+    ws.send(result);
     updateRoom();
+    updateWinners();
   } catch (error) {
     const err = error as Error;
 
@@ -32,6 +35,6 @@ export const registration = (ws: WebSocketExt, data: string) => {
       }),
       id: 0,
     });
+    ws.send(result);
   }
-  ws.send(result);
 };
